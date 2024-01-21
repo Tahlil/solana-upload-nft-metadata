@@ -9,7 +9,7 @@ Make sure you have the following installed on your machine:
 
 - [Node.js](https://nodejs.org/) (version 14 or higher)
 - [npm](https://www.npmjs.com/) (Node.js package manager)
-- [TypeScript](https://www.typescriptlang.org/) (install globally using `npm install -g typescript ts-node`)
+
 
 ## Setup
 
@@ -32,16 +32,6 @@ Make sure you have the following installed on your machine:
    ```
 
 4. Create a `.env` file in the root of the project and add any necessary environment variables. You can use the provided `.env.example` file as a template.
-
-## Build
-
-Compile TypeScript to JavaScript using the following command:
-
-```bash
-tsc
-```
-
-This will generate the compiled JavaScript files in the `dist` directory.
 
 ## Run
 
