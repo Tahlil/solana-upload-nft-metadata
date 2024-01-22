@@ -94,8 +94,14 @@ async function main() {
   console.log("Metadata holding folder base CID:\n" + getCIDLink(cid));
 }
 
-if (namesAndDescriptionsValid) {
-  main();
-} else {
-  console.log("Name and/or description and/or image lists are invalid.");
+async function test() {
+  const res = await storeNFT(path.join(__dirname, "images", "0.png"), "test", "")
+  console.log(res);
 }
+// if (namesAndDescriptionsValid) {
+//   main();
+// } else {
+//   console.log("Name and/or description and/or image lists are invalid.");
+// }
+
+test()
