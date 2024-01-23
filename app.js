@@ -1,6 +1,7 @@
 require("dotenv").config();
 const { NFTStorage, File, Blob } = require("nft.storage");
 const { filesFromPath } = require("files-from-path");
+const mime = require('mime-types');
 
 //requiring path and fs modules
 const path = require("path");
@@ -32,17 +33,12 @@ async function storeFilesInNFTStorage(files) {
   return cid;
 }
 
-// Import the NFTStorage class and File constructor from the 'nft.storage' package
-import { NFTStorage, File } from 'nft.storage'
 
-// The 'mime' npm package helps us set the correct file type on our File objects
-import mime from 'mime'
-
-// The 'fs' builtin module on Node.js provides access to the file system
-import fs from 'fs'
-
-// The 'path' module provides helpers for manipulating filesystem paths
-import path from 'path'
+async function fileFromPath(filePath) {
+  const content = await fs.promises.readFile(filePath)
+  const type = "image/*"
+  return new File([content], path.basename(filePath), { type })
+}
 
 // Paste your NFT.Storage API key into the quotes:
 const NFT_STORAGE_KEY = 'REPLACE_ME_WITH_YOUR_KEY'
@@ -51,11 +47,8 @@ async function storeNFT(imagePath, name, description) {
     // load the file from disk
     const image = await fileFromPath(imagePath)
 
-    // create a new NFTStorage client using our API key
-    const nftstorage = new NFTStorage({ token: NFT_STORAGE_KEY })
-
     // call client.store, passing in the image & metadata
-    return nftstorage.store({
+    return client.store({
         image,
         name,
         description,
@@ -63,6 +56,10 @@ async function storeNFT(imagePath, name, description) {
 }
 
 const nftNames = [];
+
+function validFileStructure() {
+  return true;
+}
 
 let namesAndDescriptionsValid = validFileStructure();
 let baseIpfsLink = "image",files;
